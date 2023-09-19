@@ -65,7 +65,9 @@ class VersionGitHubActionsOutput:
         return "\n".join(f"{key}={value!s}" for key, value in outputs.items())
 
     def write_if_possible(self, filename: str | None = None) -> None:
+        log.info(f"Filename is {filename}")
         output_file = filename or os.getenv(self.OUTPUT_ENV_VAR)
+        log.info(output_file)
         if not output_file:
             log.info("not writing GitHub Actions output, as no file specified")
             return

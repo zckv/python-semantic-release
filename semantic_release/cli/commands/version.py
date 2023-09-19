@@ -287,7 +287,11 @@ def version(  # noqa: C901
 
     gha_output.released = False
     gha_output.version = new_version
+    log.info(gha_output)
+    log.info(gha_output.released)
+    log.info(gha_output.version)
     ctx.call_on_close(gha_output.write_if_possible)
+    log.info("WRITE if possible called")
 
     # Print the new version so that command-line output capture will work
     click.echo(str(new_version))

@@ -370,6 +370,11 @@ match = "(main|master)"
 prerelease = false
 prerelease_token = "rc"
 
+[tool.semantic_release.branches.fix]
+match = "(fix*)"
+prerelease = true
+prerelease_token = "rc"
+
 [tool.semantic_release.branches."8.0.x"]
 match = "8.0.x"
 prerelease = true

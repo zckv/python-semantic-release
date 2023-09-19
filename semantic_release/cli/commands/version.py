@@ -230,6 +230,7 @@ def version(  # noqa: C901
     major_on_zero = runtime.major_on_zero
     build_command = runtime.build_command
     opts = runtime.global_cli_options
+    log.info("Declare gha_output")
     gha_output = VersionGitHubActionsOutput()
 
     if prerelease_token:
@@ -521,6 +522,8 @@ def version(  # noqa: C901
             repo.git.push(remote_url, active_branch)
             repo.git.push("--tags", remote_url, active_branch)
 
+    log.info("released = True for gha_output")
+    log.info(gha_output)
     gha_output.released = True
 
     if make_vcs_release and opts.noop:

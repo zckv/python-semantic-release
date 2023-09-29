@@ -67,7 +67,12 @@ class VersionGitHubActionsOutput:
     def write_if_possible(self, filename: str | None = None) -> None:
         log.info(f"Filename is {filename}")
         output_file = filename or os.getenv(self.OUTPUT_ENV_VAR)
-        log.info(output_file)
+        log.info(f"The output_file is {output_file}")
+        log.info(f"The envirronement is {os.environ}")
+        if "GITHUB_OUTPUT" in os.environ:
+            with open(os.environ['GITHUB_OUTPUT'], mode='w') as f:
+                print(self.to_output_text(), file=f)
+        
         if not output_file:
             log.info("not writing GitHub Actions output, as no file specified")
             return

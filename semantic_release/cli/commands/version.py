@@ -288,9 +288,9 @@ def version(  # noqa: C901
 
     gha_output.released = False
     gha_output.version = new_version
-    log.info(gha_output)
-    log.info(gha_output.released)
-    log.info(gha_output.version)
+    log.info(f"gha_output: {gha_output}")
+    log.info(f"gha_output.released: {gha_output.released}")
+    log.info(f"gha_output.version: {gha_output.version}")
     ctx.call_on_close(gha_output.write_if_possible)
     log.info("WRITE if possible called")
 
@@ -523,7 +523,7 @@ def version(  # noqa: C901
             repo.git.push("--tags", remote_url, active_branch)
 
     log.info("released = True for gha_output")
-    log.info(gha_output)
+    log.info(f"gha_output: {gha_output}")
     gha_output.released = True
 
     if make_vcs_release and opts.noop:

@@ -10,10 +10,11 @@ log = logging.getLogger(__name__)
 
 class VersionGitHubActionsOutput:
     OUTPUT_ENV_VAR = "GITHUB_OUTPUT"
-
+    
     def __init__(
         self, released: bool | None = None, version: Version | None = None
     ) -> None:
+        log.info("VGAO object is created")
         self._released = released
         self._version = version
 

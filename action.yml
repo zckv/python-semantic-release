@@ -107,7 +107,7 @@ runs:
     - run: |
         python -m venv ~/semantic-release/.venv
         source ~/semantic-release/.venv/bin/activate
-        pip install python-semantic-release
+        python -m pip install 'python-semantic-release @ git+https://github.com/zckv/python-semantic-release@fix_try_thing'
         semantic-release --help
       shell: bash
     - run: action.sh

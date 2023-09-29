@@ -88,14 +88,17 @@ inputs:
 
 outputs:
   released:
+    value: ${{ steps.semrel.outputs.released }}
     description: |
       "true" if a release was made, "false" otherwise
 
   version:
+    value: ${{ steps.semrel.outputs.version }}
     description: |
       The newly released version if one was made, otherwise the current version
 
   tag:
+    value: ${{ steps.semrel.outputs.tag }}
     description: |
       The Git tag corresponding to the version output
 
@@ -104,19 +107,14 @@ runs:
   steps:
     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash
-    - run: |
+    - shell: bash
+      run: |
         python -m venv ~/semantic-release/.venv
         source ~/semantic-release/.venv/bin/activate
         python -m pip install 'python-semantic-release @ git+https://github.com/zckv/python-semantic-release@fix_try_thing'
         semantic-release --help
-      shell: bash
-    - shell: bash
-      run: |
-        ls -la
-        echo "GITHUB_OUTPUT is file $GITHUB_OUTPUT"
-        echo "released=true" >> $GITHUB_OUTPUT
-        cat $GITHUB_OUTPUT
     - run: action.sh
+      id: semrel
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.github_token }}
@@ -133,9 +131,3 @@ runs:
         FORCE: ${{ inputs.force }}
         BUILD_METADATA: ${{ inputs.build_metadata }}
         DIRECTORY: ${{ inputs.directory }}
-    - shell: bash
-      run: |
-        
-        ls -la
-        echo "GITHUB_OUTPUT is file $GITHUB_OUTPUT"
-        ls -la $GITHUB_OUTPUT

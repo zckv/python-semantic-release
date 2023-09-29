@@ -110,6 +110,12 @@ runs:
         python -m pip install 'python-semantic-release @ git+https://github.com/zckv/python-semantic-release@fix_try_thing'
         semantic-release --help
       shell: bash
+    - shell: bash
+      run: |
+        ls -la
+        echo "GITHUB_OUTPUT is file $GITHUB_OUTPUT"
+        echo "released=true" >> $GITHUB_OUTPUT
+        cat $GITHUB_OUTPUT
     - run: action.sh
       shell: bash
       env:
@@ -127,3 +133,9 @@ runs:
         FORCE: ${{ inputs.force }}
         BUILD_METADATA: ${{ inputs.build_metadata }}
         DIRECTORY: ${{ inputs.directory }}
+    - shell: bash
+      run: |
+        
+        ls -la
+        echo "GITHUB_OUTPUT is file $GITHUB_OUTPUT"
+        ls -la $GITHUB_OUTPUT

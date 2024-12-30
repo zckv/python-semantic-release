@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 # Convert "true"/"false" into command line args, returns "" if not defined
 eval_boolean_action_input() {
@@ -72,7 +72,8 @@ fi
 
 # See https://github.com/actions/runner-images/issues/6775#issuecomment-1409268124
 # and https://github.com/actions/runner-images/issues/6775#issuecomment-1410270956
-git config --system --add safe.directory "*"
+# NOTE: remove comment ?
+# git config --system --add safe.directory "*"
 
 if [[ -n "$INPUT_SSH_PUBLIC_SIGNING_KEY" && -n "$INPUT_SSH_PRIVATE_SIGNING_KEY" ]]; then
 	echo "SSH Key pair found, configuring signing..."

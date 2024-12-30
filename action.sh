@@ -60,10 +60,10 @@ cd "${INPUT_DIRECTORY}"
 
 # Set Git details
 if ! [ "${INPUT_GIT_COMMITTER_NAME:="-"}" = "-" ]; then
-	git config --global user.name "$INPUT_GIT_COMMITTER_NAME"
+	git config user.name "$INPUT_GIT_COMMITTER_NAME"
 fi
 if ! [ "${INPUT_GIT_COMMITTER_EMAIL:="-"}" = "-" ]; then
-	git config --global user.email "$INPUT_GIT_COMMITTER_EMAIL"
+	git config user.email "$INPUT_GIT_COMMITTER_EMAIL"
 fi
 if [ "${INPUT_GIT_COMMITTER_NAME:="-"}" != "-" ] && [ "${INPUT_GIT_COMMITTER_EMAIL:="-"}" != "-" ]; then
 	# Must export this value to the environment for PSR to consume the override
@@ -100,11 +100,11 @@ if [[ -n "$INPUT_SSH_PUBLIC_SIGNING_KEY" && -n "$INPUT_SSH_PRIVATE_SIGNING_KEY" 
 	echo "$INPUT_GIT_COMMITTER_EMAIL $INPUT_SSH_PUBLIC_SIGNING_KEY" >~/.ssh/allowed_signers
 
 	# Configure git for signing
-	git config --global gpg.format ssh
-	git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
-	git config --global user.signingKey ~/.ssh/signing_key
-	git config --global commit.gpgsign true
-	git config --global tag.gpgsign true
+	git config gpg.format ssh
+	git config gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
+	git config user.signingKey ~/.ssh/signing_key
+	git config commit.gpgsign true
+	git config tag.gpgsign true
 fi
 
 # Copy inputs into correctly-named environment variables
